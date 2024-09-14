@@ -3,16 +3,18 @@ package org.example;
 import org.example.company.n;
 import org.example.dao.ConnectionMaker;
 import org.example.dao.DConnectionMaker;
+import org.example.dao.DaoFactory;
 import org.example.dao.UserDao;
 import org.example.domain.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 
 public class userTest {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ConnectionMaker dConnectionMaker = new DConnectionMaker();
-        UserDao dao = new UserDao(dConnectionMaker);
-
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
         User user = new User();
 
         user.setId("kong");
