@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.22'
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework:spring-jdbc:5.3.28'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
