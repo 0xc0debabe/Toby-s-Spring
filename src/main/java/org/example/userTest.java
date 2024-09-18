@@ -23,4 +23,5 @@ public class userTest {
         CountingConnectionMaker ccm = context.getBean("connectionMaker", CountingConnectionMaker.class);
         System.out.println(ccm.getCounter());
     }
+    
 }

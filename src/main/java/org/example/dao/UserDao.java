@@ -19,9 +19,9 @@ public  class UserDao {
         this.connectionMaker = connectionMaker;
     }
 
-    public void add(User user) throws SQLException {
-//        Connection c = connectionMaker.makeNewConnection();
-        Connection c = dataSource.getConnection();
+    public void add(User user) throws SQLException, ClassNotFoundException {
+        Connection c = connectionMaker.makeNewConnection();
+//        Connection c = dataSource.getConnection();
         PreparedStatement ps = c.prepareStatement(
                 "insert into users(id, name, password) values(?, ?, ?)"
         );
@@ -48,4 +48,25 @@ public  class UserDao {
         c.close();
         return user;
     }
+
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+        Connection c = connectionMaker.makeNewConnection();
+        PreparedStatement ps = c.prepareStatement("delete from users");
+        ps.executeUpdate();
+        ps.close();
+        c.close();
+    }
+
+    public int getCount() throws SQLException, ClassNotFoundException {
+        Connection c = connectionMaker.makeNewConnection();
+        PreparedStatement ps = c.prepareStatement("select count(*) from users");
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        rs.close();
+        ps.close();
+        c.close();
+        return count;
+    }
+
 }
